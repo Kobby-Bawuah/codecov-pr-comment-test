@@ -27,14 +27,22 @@ jobs:
           ./venv/bin/python -m pip install --upgrade pip
           ./venv/bin/python -m pip install -r requirements.txt
 
-      - name: Run tests and generate coverage report
+      - name: Run tests and generate both reports
         run: |
-          ./venv/bin/python -m pytest --cov=src --cov-report=xml
+          ./venv/bin/python -m pytest --cov=src --cov-report=xml --junitxml=junit.xml -o junit_family=legacy || true
 
+      # Upload coverage report
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
           flags: unittests
-          name: codecov_demo
+          name: Coverage Report Test
+
+      # Upload JUnit report (optional but recommended)
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
