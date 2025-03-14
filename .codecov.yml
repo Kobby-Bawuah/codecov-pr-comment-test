@@ -1,7 +1,1 @@
-comment:
-  layout: "header, diff, files, footer"  # Change layout to test effect
-  behavior: new  # Force Codecov to create a new comment instead of updating
-  require_changes: false  # Ensure Codecov always posts a comment
-  require_base: false  # Allow PR comments even if there's no baseline report
-  require_head: true  # Require head report for PR comment
-  hide_project_coverage: false  # Show full project coverage in PR comment
+comment: false
