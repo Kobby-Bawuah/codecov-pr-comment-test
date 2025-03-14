@@ -6,3 +6,4 @@ def subtract(a, b):
     return a - b
 
 # Testing default Codecov behavior
+# Testing default Codecov behavior
